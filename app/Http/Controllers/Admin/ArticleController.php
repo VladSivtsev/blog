@@ -9,11 +9,7 @@ use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return view('admin.articles.index', [
@@ -21,26 +17,18 @@ class ArticleController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+   public function create()
     {
-        return view('admin.articles.create', [
+        return view('admin.articles.index', [
           'article'    => [],
           'categories' => Category::with('children')->where('parent_id', 0)->get(),
           'delimiter'  => ''
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function store(Request $request)
     {
         $article = Article::create($request->all());
@@ -52,13 +40,6 @@ class ArticleController extends Controller
 
         return redirect()->route('admin.article.index');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Article  $article
-     * @return \Illuminate\Http\Response
-     */
     public function show(Article $article)
     {
         //
@@ -69,14 +50,14 @@ class ArticleController extends Controller
      *
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
-     */
+
     public function edit(Article $article)
     {
-        return view('admin.articles.edit', [
-          'article'    => $article,
-          'categories' => Category::with('children')->where('parent_id', 0)->get(),
-          'delimiter'  => ''
-        ]);
+    return view('admin.articles.edit', [
+    'article'    => $article,
+    'categories' => Category::with('children')->where('parent_id', 0)->get(),
+    'delimiter'  => ''
+    ]);
     }
 
     /**
@@ -85,18 +66,18 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Article $article)
     {
-        $article->update($request->except('slug'));
+    $article->update($request->except('slug'));
 
-        // Categories
-        $article->categories()->detach();
-        if($request->input('categories')) :
-          $article->categories()->attach($request->input('categories'));
-        endif;
+    // Categories
+    $article->categories()->detach();
+    if($request->input('categories')) :
+    $article->categories()->attach($request->input('categories'));
+    endif;
 
-        return redirect()->route('admin.article.index');
+    return redirect()->route('admin.article.index');
     }
 
     /**
@@ -104,12 +85,19 @@ class ArticleController extends Controller
      *
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Article $article)
     {
-        $article->categories()->detach();
-        $article->delete();
+    $article->categories()->detach();
+    $article->delete();
 
-        return redirect()->route('admin.article.index');
+    return redirect()->route('admin.article.index');
     }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Article  $article
+     * @return \Illuminate\Http\Response
+
+
 }

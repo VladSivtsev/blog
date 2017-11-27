@@ -18,9 +18,20 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>['auth']], 
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
-
+Route::get('/news', function () {
+    return view('news');
+});
+Route::get('/about', function () {
+    return view('about');
+});
+Route::get('/about', function () {
+    return view('about');
+});
+Route::resource('/category', 'CategoryController', ['as'=>'admin']);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/main', 'MainController@index')->name('main');
+

@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class Article extends Model
 {
     // Mass assigned
-    protected $fillable = ['title', 'slug', 'description_short', 'description', 'image', 'image_show', 'meta_title', 'meta_description', 'meta_keyword', 'published', 'created_by', 'modified_by'];
+ protected $fillable = ['title', 'slug', 'description_short', 'description', 'image', 'image_show', 'meta_title', 'meta_description', 'meta_keyword', 'published', 'created_by', 'modified_by'];
 
     // Mutators
     public function setSlugAttribute($value) {
@@ -17,13 +17,13 @@ class Article extends Model
     }
 
     // Polymorphic relation with categories
-    public function categories()
+ /*   public function categories()
     {
-      return $this->morphToMany('App\Category', 'categoryable');
+      return $this->morphToMany('App\Category', 'categories');
     }
 
-    public function scopeLastArticles($query, $count)
+   /* public function scopeLastArticles($query, $count)
     {
       return $query->orderBy('created_at', 'desc')->take($count)->get();
-    }
+    }*/
 }
